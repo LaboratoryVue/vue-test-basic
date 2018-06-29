@@ -17,15 +17,10 @@
             <th>
               <form class="ui form" @submit.prevent="addItem">
                 <div class="field">
-                  <input v-model="item"
-                    type="text"
-                    class="prompt"
-                    placeholder="Add item..." value="" />
+                  <input v-model="item" type="text" class="prompt" placeholder="Add item..." value="" />
                 </div>
-                <button type="submit"
-                  class="ui button" :disabled="!item">Add</button>
-                <span @click="removeAllItems"
-                  class="ui label">Remove all</span>
+                <button type="submit" class="ui button" :disabled="!item">Add</button>
+                <span @click="removeAllItems" class="ui label">Remove all</span>
               </form>
             </th>
           </tr>
