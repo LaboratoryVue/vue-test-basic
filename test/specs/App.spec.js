@@ -8,6 +8,7 @@ describe('App.vue', () => {
     wrapper = shallow(App);
   });
 
+  // => тестим наличие HTML-элементов
   it('should render correct contents', () => {
     expect(wrapper.html()).to.contain('<th>Items</th>');
     expect(wrapper.html()).to.contain(
@@ -21,8 +22,17 @@ describe('App.vue', () => {
     );
   });
 
+  // => тестим данные компонента
   it('should set correct default data', () => {
     expect(wrapper.vm.item).to.equal('');
     expect(wrapper.vm.items).to.deep.equal([]);
+  });
+
+  // => тестим значение атрибута элемента
+  it('should have button Add disabled', () => {
+    // => получаем button с классами .ui и .button
+    const button = wrapper.find('.ui .button');
+    // => ожидаем, что у кнопки атрибут disabled стоит в true
+    expect(button.element.disabled).to.be.true;
   });
 });
