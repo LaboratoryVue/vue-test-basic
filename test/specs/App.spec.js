@@ -1,21 +1,23 @@
-import Vue from 'vue';
 import App from '@/App';
+import { shallow } from 'vue-test-utils';
 
 describe('App.vue', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(App);
+  });
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(App);
-    const wm = new Constructor().$mount();
-    expect(wm.$el.querySelector('.ui .selectable thead tr th').textContent).to.contain('Items')
-    expect(wm.$el.querySelector('.ui .button').textContent).to.contain('Add')
-    expect(wm.$el.querySelector('.ui .label').textContent).to.contain('Remove all')
+    expect(wrapper.html())
+      .to.contain('<th>Items</th>');
+    expect(wrapper.html())
+      .to.contain('<input v-model="item" type="text" class="prompt" placeholder="Add item..." value="" />');
+    expect(wrapper.html())
+      .to.contain('<button type="submit" class="ui button" :disabled="!item">Add</button>');
+    expect(wrapper.html())
+      .to.contain('<span @click="removeAllItems" class="ui label">Remove all</span>');
   });
   it('should set correct default data', () => {
-    // => функция data возвращает объект компонента App
-    const initData = App.data();
-    // => ожидаем, что свойство item объекта initData является пустой строкой
-    expect(initData.item).to.equal('');
-    // => ожидаем, что свойство items объекта initData является пустым массивом
-    // => deep.equal - deep для сравнения объектов, ибо объекты ссылочные типы данных и простое сравнение здесь не сработает
-    expect(initData.items).to.deep.equal([]);
+    expect(wrapper.wm.item).to.equal('');
+    expect(wrapper.wm.items).to.deep.equal([]);
   });
 });
